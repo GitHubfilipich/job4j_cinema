@@ -6,4 +6,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="scripts/001_ddl_create_initial_schema.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/002_dml_insert_files.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/003_dml_insert_genres.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_dml_insert_films.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_dml_insert_halls.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_dml_insert_film_sessions.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
