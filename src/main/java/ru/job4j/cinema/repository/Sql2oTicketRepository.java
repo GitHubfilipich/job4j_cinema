@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.Ticket;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -31,16 +32,11 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Optional<Ticket> findBySessionIdAndRowNumberAndPlaceNumber(int sessionId, int rowNumber, int placeNumber) {
+    public Collection<Ticket> findBySessionId(int sessionId) {
         try (var connection = sql2o.open()) {
-            var query = connection.createQuery(
-                    "SELECT * FROM tickets WHERE session_id = :session_id AND row_number = :row_number AND place_number = :place_number");
-            var ticket = query
+            return connection.createQuery("SELECT * FROM tickets WHERE session_id = :session_id")
                     .addParameter("session_id", sessionId)
-                    .addParameter("row_number", rowNumber)
-                    .addParameter("place_number", placeNumber)
-                    .executeAndFetchFirst(Ticket.class);
-            return Optional.ofNullable(ticket);
+                    .executeAndFetch(Ticket.class);
         }
     }
 }
