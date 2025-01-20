@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<div class="container mt-2">
+    <h3>Проект job4j_cinema, выполняемый в рамках курса Job4j</h3>
+    <ul>
+        <li><a th:href="@{/schedule}">Расписание</a></li>
+        <li><a th:href="@{/films}">Кинотека</a></li>
+    </ul>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>
