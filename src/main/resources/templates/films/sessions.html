@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<div class="container mt-2">
+    <h3>Расписание</h3>
+</div>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Начало сеанса</th>
+                <th scope="col">Конец сеанса</th>
+                <th scope="col">Зал</th>
+                <th scope="col">Фильм</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Свободных мест</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="currentSession: ${sessions}">
+                <td th:text="${currentSession.startTime.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}"/>
+                <td th:text="${currentSession.endTime.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}"/>
+                <td th:text="${currentSession.hall}"/>
+                <td th:text="${currentSession.film}"/>
+                <td th:text="${currentSession.price}"/>
+                <td th:text="${currentSession.vacant}"/>
+                <td>
+                    <a th:href="@{/films/sessions/buy/{id}(id=${currentSession.id})}"
+                       th:text="'Купить'"
+                       th:class="'btn btn-primary'"
+                       th:if="${currentSession.vacant > 0}">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

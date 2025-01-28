@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<div class="container mt-2">
+    <h3>Кинотека</h3>
+</div>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Жанр</th>
+                <th scope="col">Год создания</th>
+                <th scope="col">Ограничение</th>
+                <th scope="col">Продолжительность</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="film: ${films}">
+                <td><a th:text="${film.name}" th:href="@{/films/{filmId}(filmId=${film.id})}"></a></td>
+                <td th:text="${film.genre}"/>
+                <td th:text="${film.year}"/>
+                <td th:text="${film.minimalAge}"/>
+                <td th:text="${film.durationInMinutes}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

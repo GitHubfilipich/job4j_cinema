@@ -31,9 +31,9 @@ public class AuthorizationFilter extends HttpFilter {
     }
 
     private boolean isAlwaysPermitted(String uri) {
-        return uri.startsWith("/users/register")
-                || uri.startsWith("/users/login")
+        return uri.startsWith("/films")
+                || uri.startsWith("/users")
+                || uri.startsWith("/files")
                 || "/".equals(uri);
-        // TODO продолжить список страниц куда доступен без регистрации
     }
 }

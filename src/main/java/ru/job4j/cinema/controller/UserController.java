@@ -38,7 +38,7 @@ public class UserController {
             return "errors/404";
         }
         session.setAttribute("user", savedUser.get());
-        return "redirect:/";
+        return "redirect:/films/sessions";
     }
 
     @GetMapping("/login")
@@ -55,7 +55,7 @@ public class UserController {
         }
         var session = request.getSession();
         session.setAttribute("user", userOptional.get());
-        return "redirect:/";
+        return "redirect:/films/sessions";
     }
 
     @GetMapping("/logout")

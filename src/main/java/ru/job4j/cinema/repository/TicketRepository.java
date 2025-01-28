@@ -10,4 +10,6 @@ public interface TicketRepository {
     Optional<Ticket> save(Ticket ticket);
 
     Collection<Ticket> findBySessionId(int sessionId);
+
+    Collection<Ticket> findAll();
 }

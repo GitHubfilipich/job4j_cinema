@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body th:object="${film}">
+<div class="container mt-2">
+    <h3 th:text="'Фильм &quot;' + *{name} + '&quot;'"></h3>
+</div>
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-3">
+            <div class="mb-3">
+                <img th:src="@{/files/{fileId}(fileId=*{fileId})}" class="w-100" alt="No image">
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="mb-3 d-flex">
+                <label for="genre" class="form-label me-2"><b>Жанр:</b></label>
+                <div th:text="*{genre}" id="genre"/>
+            </div>
+            <div class="mb-3 d-flex">
+                <label for="year" class="form-label me-2"><b>Год:</b></label>
+                <div th:text="*{year}" id="year"/>
+            </div>
+            <div class="mb-3 d-flex">
+                <label for="minimalAge" class="form-label me-2"><b>Ограничения:</b></label>
+                <div th:text="*{minimalAge}" id="minimalAge"/>
+            </div>
+            <div class="mb-3 d-flex">
+                <label for="durationInMinutes" class="form-label me-2"><b>Продолжительность:</b></label>
+                <div th:text="*{durationInMinutes}" id="durationInMinutes"/>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div th:text="*{description}"/>
+    </div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

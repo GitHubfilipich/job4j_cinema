@@ -25,7 +25,8 @@ public class Sql2oTicketRepository implements TicketRepository {
                     .addParameter("row_number", ticket.getRowNumber())
                     .addParameter("place_number", ticket.getPlaceNumber())
                     .addParameter("user_id", ticket.getUserId());
-            int generatedId = query.executeUpdate().getKey(Integer.class);
+            int generatedId = query.setColumnMappings(Ticket.COLUMN_MAPPING)
+                    .executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
             return Optional.of(ticket);
         }
@@ -36,6 +37,16 @@ public class Sql2oTicketRepository implements TicketRepository {
         try (var connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM tickets WHERE session_id = :session_id")
                     .addParameter("session_id", sessionId)
+                    .setColumnMappings(Ticket.COLUMN_MAPPING)
+                    .executeAndFetch(Ticket.class);
+        }
+    }
+
+    @Override
+    public Collection<Ticket> findAll() {
+        try (var connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM tickets")
+                    .setColumnMappings(Ticket.COLUMN_MAPPING)
                     .executeAndFetch(Ticket.class);
         }
     }

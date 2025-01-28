@@ -5,7 +5,9 @@ import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.repository.TicketRepository;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SimpleTicketService implements TicketService {
@@ -24,5 +26,12 @@ public class SimpleTicketService implements TicketService {
     @Override
     public Collection<Ticket> findBySessionId(int sessionId) {
         return ticketRepository.findBySessionId(sessionId);
+    }
+
+    @Override
+    public Map<Integer, Long> numberOfTicketsForSessions() {
+        return ticketRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Ticket::getId, Collectors.counting()));
     }
 }
