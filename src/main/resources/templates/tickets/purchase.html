@@ -2,10 +2,48 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head th:insert="fragments/header :: header"></head>
 <body>
-<div class="container mt-2">
-    <h3>Покупка билета</h3>
+<div class="container">
+    <form class="mt-3" th:action="@{/tickets/purchase}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="sessionId" th:value="${currentSession.id}">
+        <input type="hidden" name="userId" th:value="${user.id}">
+        <div class="container mt-2">
+            <h3 th:text="'Покупка билета на фильм &quot;' + ${currentSession.film} + '&quot;'"></h3>
+        </div>
+        <div class="mb-3 d-flex">
+            <label for="startTime" class="form-label me-2"><b>Начало сеанса:</b></label>
+            <div th:text="${currentSession.startTime.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}"
+                 id="startTime" name="startTime"/>
+        </div>
+        <div class="mb-3 d-flex">
+            <label for="hall" class="form-label me-2"><b>Зал:</b></label>
+            <div th:text="${currentSession.hall}" id="hall" name="startTime"/>
+        </div>
+        <div class="mb-3 d-flex">
+            <label for="price" class="form-label me-2"><b>Цена:</b></label>
+            <div th:text="${currentSession.price}" id="price"/>
+        </div>
+        <div class="mb-3">
+            <label for="rowNumber"><b>Выбранный ряд:</b></label>
+            <select class="form-control" id="rowNumber" name="rowNumber" required>
+                <option value="">Выберите...</option>
+                <option th:each="num : ${#numbers.sequence(1, currentSession.rowCount)}" th:value="${num}" th:text="${num}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="placeNumber"><b>Выбранное место:</b></label>
+            <select class="form-control" id="placeNumber" name="placeNumber" required>
+                <option value="">Выберите...</option>
+                <option th:each="num : ${#numbers.sequence(1, currentSession.placeCount)}" th:value="${num}" th:text="${num}"></option>
+            </select>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/films/sessions}">Отмена</a></div>
+                <div class="col-6"><button class="btn btn-primary w-100" type="submit">Купить</button></div>
+            </div>
+        </div>
+    </form>
 </div>
-
 <div th:include="fragments/footer :: footer"></div>
 </body>
 </html>

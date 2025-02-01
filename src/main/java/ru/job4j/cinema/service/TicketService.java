@@ -12,5 +12,5 @@ public interface TicketService {
 
     Collection<Ticket> findBySessionId(int sessionId);
 
-    Map<Integer, Long> numberOfTicketsForSessions();
+    Map<Integer, Integer> numberOfTicketsForSessions();
 }

@@ -4,11 +4,9 @@ import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.dto.FilmSessionDTO;
 import ru.job4j.cinema.model.FilmSession;
-import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.repository.FilmSessionRepository;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,18 +25,27 @@ public class SimpleFilmSessionService implements FilmSessionService {
     }
 
     @Override
-    public Optional<FilmSession> findById(int id) {
-        return filmSessionRepository.findById(id);
+    public Optional<FilmSessionDTO> findById(int id) {
+        return filmSessionRepository.findById(id)
+                .flatMap(filmSession -> filmSessionDTOFromFilmSession(List.of(filmSession))
+                .stream()
+                .findFirst());
     }
 
     @Override
     public Collection<FilmSessionDTO> findAll() {
-        var filmSessions = filmSessionRepository.findAll();
-        var halls = hallService.findAll();
-        var hallNames = halls.stream()
-                .collect(Collectors.toMap(Hall::getId, Hall::getName));
-        var hallCapacities = halls.stream()
-                .collect(Collectors.toMap(Hall::getId, hall -> (long) hall.getRowCount() * hall.getPlaceCount()));
+        return filmSessionDTOFromFilmSession(filmSessionRepository.findAll());
+    }
+
+    private Collection<FilmSessionDTO> filmSessionDTOFromFilmSession(Collection<FilmSession> filmSessions) {
+        Map<Integer, String> hallNames = new HashMap<>();
+        Map<Integer, Integer> hallRowCounts = new HashMap<>();
+        Map<Integer, Integer> hallPlaceCounts = new HashMap<>();
+        hallService.findAll().forEach(hall -> {
+            hallNames.put(hall.getId(), hall.getName());
+            hallRowCounts.put(hall.getId(), hall.getRowCount());
+            hallPlaceCounts.put(hall.getId(), hall.getPlaceCount());
+        });
         var filmNames = filmService.findAll()
                 .stream()
                 .collect(Collectors.toMap(FilmDto::id, FilmDto::name));
@@ -51,8 +58,11 @@ public class SimpleFilmSessionService implements FilmSessionService {
                         hallNames.getOrDefault(fs.getHallsId(), ""),
                         filmNames.getOrDefault(fs.getFilmId(), ""),
                         fs.getPrice(),
-                        hallCapacities.getOrDefault(fs.getHallsId(), 0L)
-                                - numberOfTicketsForSessions.getOrDefault(fs.getId(), 0L)))
+                        hallRowCounts.getOrDefault(fs.getHallsId(), 0)
+                                * hallPlaceCounts.getOrDefault(fs.getHallsId(), 0)
+                                - numberOfTicketsForSessions.getOrDefault(fs.getId(), 0),
+                        hallRowCounts.getOrDefault(fs.getHallsId(), 0),
+                        hallPlaceCounts.getOrDefault(fs.getHallsId(), 0)))
                 .toList();
     }
 }

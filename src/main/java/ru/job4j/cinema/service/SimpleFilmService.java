@@ -2,12 +2,12 @@ package ru.job4j.cinema.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
-import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.repository.FilmRepository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SimpleFilmService implements FilmService {
@@ -23,25 +23,22 @@ public class SimpleFilmService implements FilmService {
 
     @Override
     public Collection<FilmDto> findAll() {
-
-        // TODO - может исправить на поиск из списка всех жанров по ID - ???
-
-        return filmRepository.findAll()
-                .stream()
-                .map(this::filmDtoFromFilm).toList();
-    }
-
-    private FilmDto filmDtoFromFilm(Film film) {
-        var genre = genreService.findById(film.getGenreId())
-                .map(Genre::getName)
-                .orElse("");
-        return new FilmDto(film.getId(), film.getName(), film.getDescription(), film.getYear(), film.getMinimalAge(),
-                film.getDurationInMinutes(), film.getFileId(), genre);
+        var genreNames = genreService.findAll().stream()
+                .collect(Collectors.toMap(Genre::getId, Genre::getName));
+        return filmRepository.findAll().stream()
+                .map(film -> new FilmDto(film.getId(), film.getName(), film.getDescription(), film.getYear(),
+                        film.getMinimalAge(), film.getDurationInMinutes(), film.getFileId(),
+                        genreNames.getOrDefault(film.getGenreId(), "")))
+                .toList();
     }
 
     @Override
     public Optional<FilmDto> findById(int id) {
         return filmRepository.findById(id)
-                .map(this::filmDtoFromFilm);
+                .map(film -> new FilmDto(film.getId(), film.getName(), film.getDescription(), film.getYear(),
+                        film.getMinimalAge(), film.getDurationInMinutes(), film.getFileId(),
+                        genreService.findById(film.getGenreId())
+                                .map(Genre::getName)
+                                .orElse("")));
     }
 }

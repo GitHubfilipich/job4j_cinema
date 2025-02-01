@@ -20,6 +20,12 @@ public class SimpleTicketService implements TicketService {
 
     @Override
     public Optional<Ticket> save(Ticket ticket) {
+        if (ticketRepository.findBySessionId(ticket.getSessionId()).stream()
+                .anyMatch(currentTicket -> currentTicket.getRowNumber() == ticket.getRowNumber()
+                        && currentTicket.getPlaceNumber() == ticket.getPlaceNumber())) {
+            return Optional.empty();
+        }
+
         return ticketRepository.save(ticket);
     }
 
@@ -29,9 +35,11 @@ public class SimpleTicketService implements TicketService {
     }
 
     @Override
-    public Map<Integer, Long> numberOfTicketsForSessions() {
+    public Map<Integer, Integer> numberOfTicketsForSessions() {
         return ticketRepository.findAll()
                 .stream()
-                .collect(Collectors.groupingBy(Ticket::getId, Collectors.counting()));
+                .collect(Collectors.groupingBy(
+                        Ticket::getSessionId,
+                        Collectors.collectingAndThen(Collectors.counting(), Math::toIntExact)));
     }
 }
