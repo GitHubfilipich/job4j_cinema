@@ -39,4 +39,5 @@ build/
 .DS_Store
 /testdb.mv.db
 /testdb.trace.db
+/testdb.*
 /files/

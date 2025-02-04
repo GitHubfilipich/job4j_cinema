@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.service.FilmService;
 import ru.job4j.cinema.service.FilmSessionService;
 import ru.job4j.cinema.service.TicketService;
 

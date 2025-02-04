@@ -34,6 +34,7 @@ public class UserController {
     public String register(Model model, @ModelAttribute User user, HttpSession session) {
         var savedUser = userService.save(user);
         if (savedUser.isEmpty()) {
+            model.addAttribute("user", null);
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "errors/404";
         }

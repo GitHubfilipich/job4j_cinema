@@ -26,10 +26,7 @@ public class FilmController {
 
     @GetMapping("/list")
     public String getAll(Model model) {
-        var films = filmService.findAll()
-                .stream()
-                .sorted(Comparator.comparing(FilmDto::name, Comparator.naturalOrder()))
-                .toList();
+        var films = filmService.findAll();
         model.addAttribute("films", films);
         return "films/list";
     }
@@ -47,10 +44,7 @@ public class FilmController {
 
     @GetMapping("/sessions")
     public String getSessions(Model model) {
-        var sessions = filmSessionService.findAll()
-                .stream()
-                .sorted(Comparator.comparing(FilmSessionDTO::startTime, Comparator.naturalOrder()))
-                .toList();
+        var sessions = filmSessionService.findAll();
         model.addAttribute("sessions", sessions);
         return "films/sessions";
     }
