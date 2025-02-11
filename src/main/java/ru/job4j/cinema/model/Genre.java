@@ -8,8 +8,7 @@ public class Genre {
 
     private String name;
 
-    public Genre(int id, String name) {
-        this.id = id;
+    public Genre(String name) {
         this.name = name;
     }
 
