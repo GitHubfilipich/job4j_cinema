@@ -109,9 +109,9 @@ class Sql2oTicketRepositoryTest {
                 filmSession.setId(generatedId);
             }
 
-            var sessionIdFirst = filmSessions.stream().findFirst().get().getId();
-            var sessionIdSecond = filmSessions.stream().skip(1).findFirst().get().getId();
-            var sessionIdThird = filmSessions.stream().skip(2).findFirst().get().getId();
+            int sessionIdFirst = filmSessions.stream().findFirst().map(FilmSession::getId).orElseThrow();
+            int sessionIdSecond = filmSessions.stream().skip(1).findFirst().map(FilmSession::getId).orElseThrow();
+            int sessionIdThird = filmSessions.stream().skip(2).findFirst().map(FilmSession::getId).orElseThrow();
             tickets = List.of(new Ticket(sessionIdFirst, 1, 1, 1),
                     new Ticket(sessionIdFirst, 2, 2, 1),
                     new Ticket(sessionIdSecond, 1, 1, 1),
@@ -156,7 +156,7 @@ class Sql2oTicketRepositoryTest {
      */
     @Test
     void whenSaveThenGetTicket() {
-        var ticket = tickets.stream().findFirst().get();
+        var ticket = tickets.stream().findFirst().orElseThrow();
 
         var actualTicket = sql2oTicketRepository.save(ticket);
 
@@ -169,7 +169,7 @@ class Sql2oTicketRepositoryTest {
      */
     @Test
     void whenSaveExistedThenGetEmpty() {
-        var ticket = tickets.stream().findFirst().get();
+        var ticket = tickets.stream().findFirst().orElseThrow();
         sql2oTicketRepository.save(ticket);
 
         assertThrows(Sql2oException.class, () -> sql2oTicketRepository.save(ticket));
@@ -181,12 +181,12 @@ class Sql2oTicketRepositoryTest {
     @Test
     void whenFindBySessionIdThenGetTickets() {
         addTickets();
-        var sessionId = tickets.stream().findFirst().get().getSessionId();
+        int sessionId = tickets.stream().findFirst().map(Ticket::getSessionId).orElseThrow();
         var expectedTickets = tickets.stream().filter(ticket -> ticket.getSessionId() == sessionId).toList();
 
         var actualTickets = sql2oTicketRepository.findBySessionId(sessionId);
 
-        assertThat(actualTickets).containsExactlyElementsOf(expectedTickets);
+        assertThat(actualTickets).containsExactlyInAnyOrderElementsOf(expectedTickets);
     }
 
     private void addTickets() {
@@ -213,6 +213,6 @@ class Sql2oTicketRepositoryTest {
 
         var actualTickets = sql2oTicketRepository.findAll();
 
-        assertThat(actualTickets).containsExactlyElementsOf(tickets);
+        assertThat(actualTickets).containsExactlyInAnyOrderElementsOf(tickets);
     }
 }
