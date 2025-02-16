@@ -4,19 +4,24 @@
 Покупка билетов доступна только для зарегистрированных пользователей.
 Если на выбранные сеанс и место билет уже продан, то продажа билета не производится. 
 
-Стек технологий:
-Java 19
-PostgreSQL 16.2
-Spring Boot 2.7.6
-Maven 3.9.6
-Liquibase Maven Plugin 4.15.0
-JaCoCo Maven Plugin 0.8.8
+# Стек технологий:  
+Java 19  
+PostgreSQL 16.2  
+Spring Boot 2.7.6  
+Maven 3.9.6  
+Liquibase Maven Plugin 4.15.0  
+JaCoCo Maven Plugin 0.8.8  
 SQL2O 1.6.0
 
-Запуск проекта:
-Выполнить метод main в классе Main
+# Требования к окружению
+Microsoft Windows 11  
+Java 19  
+PostgreSQL 16
 
-Взаимодействие с приложением:
+# Запуск проекта:  
+Запустить исполняемый файл "job4j_cinema.exe"
+
+# Взаимодействие с приложением:
 
 Главная страница
 ![screen_main.png](img/screen_main.png)
@@ -45,5 +50,5 @@ SQL2O 1.6.0
 Страница аутентификации
 ![screen_login.png](img/screen_login.png)
 
-Контакты
+# Контакты
 https://github.com/GitHubfilipich
