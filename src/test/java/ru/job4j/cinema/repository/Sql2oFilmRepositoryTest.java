@@ -6,6 +6,7 @@ import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.File;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
+import ru.job4j.cinema.repository.implementation.Sql2oFilmRepository;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -118,7 +119,7 @@ class Sql2oFilmRepositoryTest {
     @Test
     void whenFindByCorrectIdThenGetFilm() {
         addFilms();
-        var film = films.stream().findFirst().get();
+        var film = films.stream().findFirst().orElseThrow();
 
         var actualFilm = sql2oFilmRepository.findById(film.getId());
 

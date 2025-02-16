@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.*;
+import ru.job4j.cinema.repository.implementation.Sql2oFilmSessionRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -128,7 +129,7 @@ class Sql2oFilmSessionRepositoryTest {
     @Test
     void whenFindByCorrectIdThenGetFilmSession() {
         addFilmSessions();
-        var filmSession = filmSessions.stream().findFirst().get();
+        var filmSession = filmSessions.stream().findFirst().orElseThrow();
 
         var actualFilmSession = sql2oFilmSessionRepository.findById(filmSession.getId());
 

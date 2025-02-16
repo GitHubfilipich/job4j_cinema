@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Genre;
+import ru.job4j.cinema.repository.implementation.Sql2oGenreRepository;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -79,7 +80,7 @@ class Sql2oGenreRepositoryTest {
     @Test
     void whenFindByCorrectIdThenGetGenre() {
         addGenres();
-        var genre = genres.stream().findFirst().get();
+        var genre = genres.stream().findFirst().orElseThrow();
 
         var actualGenre = sql2oGenreRepository.findById(genre.getId());
 

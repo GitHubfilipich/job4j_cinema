@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Hall;
+import ru.job4j.cinema.repository.implementation.Sql2oHallRepository;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -56,7 +57,7 @@ class Sql2oHallRepositoryTest {
     @Test
     void whenFindByCorrectIdThenGetHall() {
         addHalls();
-        var hall = halls.stream().findFirst().get();
+        var hall = halls.stream().findFirst().orElseThrow();
 
         var actualHall = sql2oHallRepository.findById(hall.getId());
 

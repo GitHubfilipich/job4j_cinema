@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -112,22 +111,5 @@ class TicketControllerTest {
         assertThat(actualResponse).isEqualTo("/tickets/purchaseUnSuccess");
         assertThat(actualTicket).isEqualTo(ticket);
         assertThat(actualMessage).isEqualTo(message);
-    }
-
-    /**
-     * Проверяет неуспешный сценарий покупки билета методом {@code buyTicket}
-     * когда в процессе покупки происходит ошибка
-     */
-    @Test
-    void whenBuyTicketAndThrowExceptionThenGetErrorPage() {
-        var expectedException = new RuntimeException("Test");
-        when(ticketService.save(any())).thenThrow(expectedException);
-        var model = new ConcurrentModel();
-
-        var actualResponse = ticketController.buyTicket(new Ticket(), model);
-        var actualMessage = model.getAttribute("message");
-
-        assertThat(actualResponse).isEqualTo("errors/404");
-        assertThat(actualMessage).isEqualTo(expectedException.getMessage());
     }
 }

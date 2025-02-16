@@ -78,7 +78,7 @@ class UserControllerTest {
      * Проверяет неуспешный сценарий регистрации методом {@code register}
      */
     @Test
-    void whenRegisterUnSuccessfulThenGetErrorPage() {
+    void whenRegisterUnSuccessfulThenGetErrorMessage() {
         var user = new User("Test1", "test@test.test", "test1");
         var userArgumentCaptor = ArgumentCaptor.forClass(User.class);
         when(userService.save(userArgumentCaptor.capture())).thenReturn(Optional.empty());
@@ -88,7 +88,7 @@ class UserControllerTest {
         var actualUser = userArgumentCaptor.getValue();
         var actualMessage = model.getAttribute("message");
 
-        assertThat(actualResponse).isEqualTo("errors/404");
+        assertThat(actualResponse).isEqualTo("users/register");
         assertThat(actualUser).isEqualTo(user);
         assertThat(actualMessage).isEqualTo("Пользователь с такой почтой уже существует");
     }

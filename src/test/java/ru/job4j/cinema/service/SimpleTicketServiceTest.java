@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.repository.TicketRepository;
+import ru.job4j.cinema.service.implementation.SimpleTicketService;
 
 import java.util.Map;
 import java.util.Optional;

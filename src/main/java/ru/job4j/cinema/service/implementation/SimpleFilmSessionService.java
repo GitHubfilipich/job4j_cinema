@@ -1,10 +1,14 @@
-package ru.job4j.cinema.service;
+package ru.job4j.cinema.service.implementation;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.dto.FilmSessionDTO;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.repository.FilmSessionRepository;
+import ru.job4j.cinema.service.FilmService;
+import ru.job4j.cinema.service.FilmSessionService;
+import ru.job4j.cinema.service.HallService;
+import ru.job4j.cinema.service.TicketService;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -32,19 +32,14 @@ public class TicketController {
 
     @PostMapping("/purchase")
     public String buyTicket(@ModelAttribute Ticket ticket, Model model) {
-        try {
-            var ticketOptional = ticketService.save(ticket);
-            if (ticketOptional.isEmpty()) {
-                model.addAttribute("message", "Не удалось приобрести билет на заданное место. "
-                        + "Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова.");
-                return "/tickets/purchaseUnSuccess";
-            }
-            model.addAttribute("message",
-                    String.format("Вы успешно приобрели билет на ряд %s место %s.", ticket.getRowNumber(), ticket.getPlaceNumber()));
-            return "/tickets/purchaseSuccess";
-        } catch (Exception exception) {
-            model.addAttribute("message", exception.getMessage());
-            return "errors/404";
+        var ticketOptional = ticketService.save(ticket);
+        if (ticketOptional.isEmpty()) {
+            model.addAttribute("message", "Не удалось приобрести билет на заданное место. "
+                    + "Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова.");
+            return "/tickets/purchaseUnSuccess";
         }
+        model.addAttribute("message",
+                String.format("Вы успешно приобрели билет на ряд %s место %s.", ticket.getRowNumber(), ticket.getPlaceNumber()));
+        return "/tickets/purchaseSuccess";
     }
 }

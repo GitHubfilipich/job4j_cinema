@@ -5,9 +5,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.*;
+import ru.job4j.cinema.repository.implementation.Sql2oTicketRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Sql2oTicketRepositoryTest {
 
@@ -172,7 +171,9 @@ class Sql2oTicketRepositoryTest {
         var ticket = tickets.stream().findFirst().orElseThrow();
         sql2oTicketRepository.save(ticket);
 
-        assertThrows(Sql2oException.class, () -> sql2oTicketRepository.save(ticket));
+        var actualTicket = sql2oTicketRepository.save(ticket);
+
+        assertThat(actualTicket.isEmpty()).isTrue();
     }
 
     /**

@@ -36,7 +36,7 @@ public class UserController {
         if (savedUser.isEmpty()) {
             model.addAttribute("user", null);
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "errors/404";
+            return "users/register";
         }
         session.setAttribute("user", savedUser.get());
         return "redirect:/films/sessions";

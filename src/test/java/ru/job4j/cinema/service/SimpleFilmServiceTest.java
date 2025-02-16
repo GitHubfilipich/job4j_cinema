@@ -7,6 +7,7 @@ import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.repository.FilmRepository;
+import ru.job4j.cinema.service.implementation.SimpleFilmService;
 
 import java.util.ArrayList;
 import java.util.List;
