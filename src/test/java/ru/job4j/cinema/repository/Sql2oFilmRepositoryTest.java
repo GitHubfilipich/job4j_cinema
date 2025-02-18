@@ -6,7 +6,7 @@ import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.File;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.implementation.Sql2oFilmRepository;
+import ru.job4j.cinema.repository.film.Sql2oFilmRepository;
 
 import java.io.IOException;
 import java.util.Collection;

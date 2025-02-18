@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Hall;
-import ru.job4j.cinema.repository.implementation.Sql2oHallRepository;
+import ru.job4j.cinema.repository.hall.Sql2oHallRepository;
 
 import java.io.IOException;
 import java.util.Collection;

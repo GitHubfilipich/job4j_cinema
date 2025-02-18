@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.File;
-import ru.job4j.cinema.repository.implementation.Sql2oFileRepository;
+import ru.job4j.cinema.repository.file.Sql2oFileRepository;
 
 import java.io.IOException;
 import java.util.Optional;

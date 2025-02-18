@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.implementation.Sql2oGenreRepository;
+import ru.job4j.cinema.repository.genre.Sql2oGenreRepository;
 
 import java.io.IOException;
 import java.util.Collection;

@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.repository.UserRepository;
-import ru.job4j.cinema.service.implementation.SimpleUserService;
+import ru.job4j.cinema.repository.user.UserRepository;
+import ru.job4j.cinema.service.user.SimpleUserService;
+import ru.job4j.cinema.service.user.UserService;
 
 import java.util.Optional;
 

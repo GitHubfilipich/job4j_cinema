@@ -6,8 +6,8 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.ui.ConcurrentModel;
 import ru.job4j.cinema.dto.FilmSessionDTO;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.service.FilmSessionService;
-import ru.job4j.cinema.service.TicketService;
+import ru.job4j.cinema.service.film.session.FilmSessionService;
+import ru.job4j.cinema.service.ticket.TicketService;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -46,7 +46,7 @@ class TicketControllerTest {
         var actualId = integerArgumentCaptor.getValue();
         var actualSession = model.getAttribute("currentSession");
 
-        assertThat(actualResponse).isEqualTo("/tickets/purchase");
+        assertThat(actualResponse).isEqualTo("tickets/purchase");
         assertThat(actualId).isEqualTo(id);
         assertThat(actualSession).isEqualTo(session);
     }
@@ -86,7 +86,7 @@ class TicketControllerTest {
         var actualTicket = ticketArgumentCaptor.getValue();
         var actualMessage = model.getAttribute("message");
 
-        assertThat(actualResponse).isEqualTo("/tickets/purchaseSuccess");
+        assertThat(actualResponse).isEqualTo("tickets/purchaseSuccess");
         assertThat(actualTicket).isEqualTo(ticket);
         assertThat(actualMessage).isEqualTo(message);
     }
@@ -108,7 +108,7 @@ class TicketControllerTest {
         var actualTicket = ticketArgumentCaptor.getValue();
         var actualMessage = model.getAttribute("message");
 
-        assertThat(actualResponse).isEqualTo("/tickets/purchaseUnSuccess");
+        assertThat(actualResponse).isEqualTo("tickets/purchaseUnSuccess");
         assertThat(actualTicket).isEqualTo(ticket);
         assertThat(actualMessage).isEqualTo(message);
     }

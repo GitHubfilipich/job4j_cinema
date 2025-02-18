@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.GenreRepository;
-import ru.job4j.cinema.service.implementation.SimpleGenreService;
+import ru.job4j.cinema.repository.genre.GenreRepository;
+import ru.job4j.cinema.service.genre.GenreService;
+import ru.job4j.cinema.service.genre.SimpleGenreService;
 
 import java.util.Optional;
 import java.util.stream.IntStream;

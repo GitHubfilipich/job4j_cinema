@@ -5,12 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.job4j.cinema.dto.FilmDto;
-import ru.job4j.cinema.dto.FilmSessionDTO;
-import ru.job4j.cinema.service.FilmService;
-import ru.job4j.cinema.service.FilmSessionService;
-
-import java.util.Comparator;
+import ru.job4j.cinema.service.film.FilmService;
+import ru.job4j.cinema.service.film.session.FilmSessionService;
 
 @Controller
 @RequestMapping("/films")

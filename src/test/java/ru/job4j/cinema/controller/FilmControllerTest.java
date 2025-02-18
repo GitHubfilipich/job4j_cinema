@@ -6,8 +6,8 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.ui.ConcurrentModel;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.dto.FilmSessionDTO;
-import ru.job4j.cinema.service.FilmService;
-import ru.job4j.cinema.service.FilmSessionService;
+import ru.job4j.cinema.service.film.FilmService;
+import ru.job4j.cinema.service.film.session.FilmSessionService;
 
 import java.time.LocalDateTime;
 import java.util.List;

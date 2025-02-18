@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.service.FilmSessionService;
-import ru.job4j.cinema.service.TicketService;
+import ru.job4j.cinema.service.film.session.FilmSessionService;
+import ru.job4j.cinema.service.ticket.TicketService;
 
 @Controller
 @RequestMapping("/tickets")
@@ -27,7 +27,7 @@ public class TicketController {
             return "errors/404";
         }
         model.addAttribute("currentSession", filmSessionOptional.get());
-        return "/tickets/purchase";
+        return "tickets/purchase";
     }
 
     @PostMapping("/purchase")
@@ -36,10 +36,10 @@ public class TicketController {
         if (ticketOptional.isEmpty()) {
             model.addAttribute("message", "Не удалось приобрести билет на заданное место. "
                     + "Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова.");
-            return "/tickets/purchaseUnSuccess";
+            return "tickets/purchaseUnSuccess";
         }
         model.addAttribute("message",
                 String.format("Вы успешно приобрели билет на ряд %s место %s.", ticket.getRowNumber(), ticket.getPlaceNumber()));
-        return "/tickets/purchaseSuccess";
+        return "tickets/purchaseSuccess";
     }
 }

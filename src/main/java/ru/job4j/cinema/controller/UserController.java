@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ru.job4j.cinema.service.UserService;
+import ru.job4j.cinema.service.user.UserService;
 import ru.job4j.cinema.model.User;
 
 import javax.servlet.http.HttpServletRequest;

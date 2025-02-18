@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.*;
-import ru.job4j.cinema.repository.implementation.Sql2oTicketRepository;
+import ru.job4j.cinema.repository.ticket.Sql2oTicketRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

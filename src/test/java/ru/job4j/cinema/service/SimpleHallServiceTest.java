@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import ru.job4j.cinema.model.Hall;
-import ru.job4j.cinema.repository.HallRepository;
-import ru.job4j.cinema.service.implementation.SimpleHallService;
+import ru.job4j.cinema.repository.hall.HallRepository;
+import ru.job4j.cinema.service.hall.HallService;
+import ru.job4j.cinema.service.hall.SimpleHallService;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
